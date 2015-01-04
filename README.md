@@ -2,7 +2,7 @@
 
 Inspired by an article at futilitycloset.com (http://www.futilitycloset.com/2014/12/28/snowball-numbers), I wrote a python program to look for such numbers. 
 
-Basically, it takes a number and translates it into its english name and look for letter counts that ends up as a rolling snowball (ie. each letter counts increment by 1)
+Basically, it takes a number and translates it into its english name and look for letter counts that ends up as a rolling snowball (ie. each letter counts increment by 1). If the current number isn't such a snowball number, the next number is looked at (+1). This is done until you stop the program.
 
 ![](http://www.futilitycloset.com/wp-content/uploads/2014/12/2014-12-28-snowball-numbers-11.png "Example snowball")
 
