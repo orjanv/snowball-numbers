@@ -10,6 +10,16 @@ When such a number is found it is recorded to a file and sent by email to a give
 
 Note, this might take a while for two reasons, the program is far from optimized for speed and we need to look a long time for such numbers
 
+### Running the script
+
+Run the script as follows:
+
+'''python
+$ python snowball.py NUMBER
+'''
+where NUMBER is your starting point, ex 1 og 1000 or 100000000
+
+
 ### TODO
 
 * Optimize the algorithms to run faster
