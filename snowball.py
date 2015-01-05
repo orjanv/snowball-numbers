@@ -38,7 +38,7 @@ def get_num_list(number):
     return oc_list
 
 def main():
-    num = 313340350000000000000
+    num = int(sys.argv[1])
     while (1):
         num_list = get_num_list(num)
 
