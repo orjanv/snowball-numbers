@@ -14,9 +14,9 @@ Note, this might take a while for two reasons, the program is far from optimized
 
 Run the script as follows:
 
-´´´python
+```python
 $ python snowball.py NUMBER
-´´´
+```
 where NUMBER is your starting point, ex 1 og 1000 or 100000000
 
 
