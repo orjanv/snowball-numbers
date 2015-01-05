@@ -19,6 +19,7 @@ $ python snowball.py NUMBER
 ```
 where NUMBER is your starting point, ex 1 og 1000 or 100000000
 
+![](bash.png "Example run")
 
 ### TODO
 
