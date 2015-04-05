@@ -2,11 +2,12 @@
 import sys
 import os
 import subprocess
+import re
 
 from num2words import num2words
 
 
-EMAIL_ADDRESS = "user@host.com"
+EMAIL_ADDRESS = "orjanv@gmail.com"
 
 
 def letters(letter):
@@ -25,8 +26,10 @@ def get_num_list(number):
     :param number:
     """
     num = num2words(number)
+    # remove "and" occurences
+    line = re.sub(' and', '', num)
     # Take away non-letter characters
-    num = letters(num)
+    num = letters(line)
     # Find unique alphabetic chars
     num_chars = ''.join(set(num))
     # Add unique letters as keys and occurrences as values in a dict
