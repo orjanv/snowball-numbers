@@ -7,7 +7,7 @@ import re
 from num2words import num2words
 
 
-EMAIL_ADDRESS = "orjanv@gmail.com"
+EMAIL_ADDRESS = "user@host.com"
 
 
 def letters(letter):
