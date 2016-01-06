@@ -1,14 +1,13 @@
 #!/usr/bin/env python
-import sys
-import os
-import subprocess
-import re
-
+import sys, os, re, subprocess
 from num2words import num2words
 
+TO = 'user@host.com'
 
-EMAIL_ADDRESS = "user@host.com"
-
+def EmailNotify(SUBJECT, TEXT):
+    # Sends the email
+    cmd = ('echo "%s" | mailx -s "%s" "%s"' % (TEXT, SUBJECT, TO))
+    subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]
 
 def letters(letter):
     """Validate and remove non-alphabetical letters
@@ -54,10 +53,13 @@ def main():
     num = int(sys.argv[1])
     while 1:
         num_list = get_num_list(num)
-
+        print num_list
         # Notify every 100 run
         if num % 1000000 == 0:
             print num, num_list
+        elif num % 100000000 == 0:
+            subject = 'Snowball alert: reached number:' + str(num)
+            EmailNotify(subject, str(num))
 
         # TEST 1 - Test if the last value of the list is the same as the length 
         # of the list. If not, try next number
@@ -83,17 +85,17 @@ def main():
                     else:
                         x = i
                 if x == len(num_list) - 1:
-                    result = "You have found a snowball number: ", num, num_list, '\n'
+                    result = "You have found a snowball number: " + str(num)
                     f = open('snowball_numbers.txt', 'aU+')
                     f.write(str(result))
                     f.close()
                     print result
-                    fnull = open(os.devnull, 'w')
-                    subprocess.call(['mailx', '-t', result, EMAIL_ADDRESS], stdout=fnull, stderr=subprocess.STDOUT)
+                    subject = 'Snowballnumber found!'
+                    EmailNotify(subject, result)
                     exit(0)
                 else:
                     num += 1
-
+    
 
 if __name__ == '__main__':
     main()
