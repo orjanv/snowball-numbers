@@ -12,6 +12,8 @@ Note, this might take a while for two reasons, the program is far from optimized
 
 ### Running the script
 
+You will need mailx command from the mailutils package found in most linux distributions standard repositories.
+
 Run the script as follows:
 
 ```python

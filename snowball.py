@@ -53,7 +53,6 @@ def main():
     num = int(sys.argv[1])
     while 1:
         num_list = get_num_list(num)
-        print num_list
         # Notify every 100 run
         if num % 1000000 == 0:
             print num, num_list
@@ -64,30 +63,32 @@ def main():
         # TEST 1 - Test if the last value of the list is the same as the length 
         # of the list. If not, try next number
         if num_list[-1] != len(num_list):
+            #print num_list[-1] + " and " + len(num_list)
             num += 1
         else:
-            # If the last value in the list equal the length of the list, 
-            # proceed to test two:
-            # TEST 2 - Compare the partial sum - n*(n+1))/2 - based on list 
+            # TEST 2 - Compare the partial sum: n*(n+1))/2 based on list 
             # length with the sum of all items in the list
-            n = (len(num_list) * len(num_list) + 1) / 2
+            n = (len(num_list) * (len(num_list) + 1)) / 2
             x = sum(num_list)
-
+            #print len(num_list)
             if n != x:
                 # If the sums didn't match, try next number
+                #print str(n) + " and " + str(x)
                 num += 1
-            else:
+            else:                
                 # If the sums matched, proceed to check three.
                 # TEST 3 - check list items are incremented by exactly 1
-                for i in range(len(num_list) - 1):
-                    if 1 != [num_list[i + 1] - num_list[i]]:
-                        break
+                list_match = False
+                for i in range(len(num_list)):
+                    if [(num_list[i] + 1, num_list[i]) == 1]:
+                        list_match = True
                     else:
-                        x = i
-                if x == len(num_list) - 1:
-                    result = "You have found a snowball number: " + str(num)
-                    f = open('snowball_numbers.txt', 'aU+')
-                    f.write(str(result))
+                        list_match = False
+                        #x = i
+                if list_match == True:
+                    result = "I have found a snowball number: " + str(num)
+                    f = open('snowball_numbers.txt', 'a')
+                    f.write(str(result) + '\n')
                     f.close()
                     print result
                     subject = 'Snowballnumber found!'
