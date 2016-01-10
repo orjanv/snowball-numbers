@@ -17,13 +17,13 @@ You will need mailx command from the mailutils package found in most linux distr
 Run the script as follows:
 
 ```python
-$ python snowball.py NUMBER
+$ python snowball.py STARTING_NUMBER EMAIL_ADRESS
 ```
-where NUMBER is your starting point, ex 1 og 1000 or 100000000
+where NUMBER is your starting point, ex 1 og 1000 or 100000000 and EMAIL_ADRESS is your email to be notified at when hitting each 100 millionth run and if a snowballnumber is found.
 
 ![](bash.png "Example run")
 
-### TODO
+### WISHLIST
 
 * Optimize the algorithms to run faster
 * See if some tests can be shortened and improved
