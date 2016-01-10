@@ -19,7 +19,6 @@ def letters(letter):
     return ''.join(valid)
 
 def get_num_list(number):
-    start_time = time.time()
     """Converts the integer to text, removes whitespace and unwanted
     characters and symbols and return sorted list of letter occurrences
     """
@@ -39,7 +38,6 @@ def get_num_list(number):
     for w in num_dict:
         oc_list.append(num_dict[w])
     oc_list.sort()
-    print ("--- %s seconds ---" % (time.time() - start_time))
     return oc_list
 
 def main():
