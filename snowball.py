@@ -9,8 +9,8 @@ def EmailNotify(SUBJECT, TEXT, TO):
     cmd = ('echo "%s" | mailx -s "%s" "%s"' % (TEXT, SUBJECT, TO))
     subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]
 
-def letters(letter):
-    """Validate and remove non-alphabetical letters
+def ValidateLetters(letter):
+    """Validate and remove non-alphabetical ValidateLetters
     """
     valid = []
     for character in letter:
@@ -18,7 +18,7 @@ def letters(letter):
             valid.append(character)
     return ''.join(valid)
 
-def get_num_list(number):
+def GetLetterList(number):
     """Converts the integer to text, removes whitespace and unwanted
     characters and symbols and return sorted list of letter occurrences
     """
@@ -26,10 +26,10 @@ def get_num_list(number):
     # remove "and" occurences
     line = re.sub(' and', '', num)
     # Take away non-letter characters
-    num = letters(line)
+    num = ValidateLetters(line)
     # Find unique alphabetic chars
     num_chars = ''.join(set(num))
-    # Add unique letters as keys and occurrences as values in a dict
+    # Add unique ValidateLetters as keys and occurrences as values in a dict
     num_dict = {}
     for c in num_chars:
         num_dict[c] = num.count(c)
@@ -45,19 +45,25 @@ def main():
     to = sys.argv[2]
     start_time = time.time()
     while 1:
-        num_list = get_num_list(num)
-        # Notify every 100 run
+        num_list = GetLetterList(num)
+        # Notify every 10000th run
         if num % 10000 == 0:
             print num, num_list, ("--- %s seconds ---" % (time.time() - start_time))
             start_time = time.time()
-        if num % 100000000 == 0:
+        if num % 1000000000 == 0:
             subject = 'Snowball alert: reached number:' + str(num)
             EmailNotify(subject, str(num), to)
+
+        # Check if number is far off by checking if end numbers in list
+        # This is EXPERIMENTAL and might skip actual snowball numbers
+        if num_list[-1] < (len(num_list) - 5):
+            num += 5000
 
         # TEST 1 - Test if the last value of the list is the same as the length 
         # of the list. If not, try next number
         if num_list[-1] != len(num_list):
             num += 1
+        
         else:
             # TEST 2 - Compare the partial sum: n*(n+1))/2 based on list 
             # length with the sum of all items in the list
