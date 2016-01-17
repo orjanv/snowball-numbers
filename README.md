@@ -18,7 +18,7 @@ You will need ```mailx``` command from the mailutils package found in most linux
 You will also need the num2words library, available using pip:
 
 ```bash
-sudo pip install num2words
+$ sudo pip install num2words
 ```
 Run the script as follows:
 
@@ -34,8 +34,8 @@ LANGUAGE is the shortform for any of the supported languages in num2words, eg: n
 Examples:
 
 ```bash
-python snowball.py 1 user@host.com no
-python snowball.py 10000 user@host.com fr
+$ python snowball.py 1 user@host.com no
+$ python snowball.py 10000 user@host.com fr
 ```
 
 ![](bash.png "Looking for snowball numbers..")
