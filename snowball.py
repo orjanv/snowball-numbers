@@ -18,11 +18,11 @@ def ValidateLetters(letter):
             valid.append(character)
     return ''.join(valid)
 
-def GetLetterList(number):
+def GetLetterList(number, language='en'):
     """Converts the integer to text, removes whitespace and unwanted
     characters and symbols and return sorted list of letter occurrences
     """
-    num = num2words(number)
+    num = num2words(number, lang=language)
     # remove "and" occurences
     line = re.sub(' and', '', num)
     # Take away non-letter characters
@@ -43,18 +43,25 @@ def GetLetterList(number):
 def main():
     num = int(sys.argv[1])
     to = sys.argv[2]
+    try:
+        lang = sys.argv[3]
+    except:
+        lang = 'en'
     start_time = time.time()
     while 1:
-        num_list = GetLetterList(num)
+        num_list = GetLetterList(num, lang)
         # Notify every 10000th run
-        if num % 10000 == 0:
-            print num, num_list, ("--- %s seconds ---" % (time.time() - start_time))
-            start_time = time.time()
-        if num % 1000000000 == 0:
-            subject = 'Snowball alert: reached number:' + str(num)
-            EmailNotify(subject, str(num), to)
+        #if num % 10000 == 0:
+            #print num, num_list, ("--- %s seconds ---" % (time.time() - start_time))
+            #start_time = time.time()
+        if num % 10000000 == 0: # Write progress every 10th billion/milliard
+            f = open('progress.txt', 'a')
+            f.write(str(time.strftime("%c")) + " " + str(num) + " " + str(num_list) + '\n')
+            f.close()
+            #subject = 'Snowball alert: reached number:' + str(num)
+            #EmailNotify(subject, str(num), to)
 
-        # Check if number is far off by checking if end numbers in list
+        # If the last number in the sorted list is far from the amount of digits in list, we might think this is far from a snowball number.
         # This is EXPERIMENTAL and might skip actual snowball numbers
         if num_list[-1] < (len(num_list) - 5):
             num += 5000
@@ -80,14 +87,15 @@ def main():
                     else:
                         list_match = False
                 if list_match == True:
-                    result = "I have found a snowball number: " + str(num)
+                    result = "I have found a snowball number: " + str(num) + " " + str(num_list) + " " + str(time.strftime("%c"))
                     f = open('snowball_numbers.txt', 'a')
                     f.write(str(result) + '\n')
                     f.close()
                     print result
                     subject = 'Snowballnumber found!'
-                    EmailNotify(subject, result, to)
-                    exit(0)
+                    #EmailNotify(subject, result, to)
+                    #exit(0)
+                    num += 1
                 else:
                     num += 1
 
